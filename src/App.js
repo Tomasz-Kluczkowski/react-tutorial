@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Radium, {StyleRoot} from 'radium';
 import './App.css';
 import Person from './Person/Person';
 
@@ -46,20 +45,12 @@ class App extends Component {
             border: '1px solid blue',
             padding: '8px',
             cursor: 'pointer',
-            ':hover': {
-                backgroundColor: 'lightgreen',
-                color: 'black'
-            }
         };
 
         let persons = null;
 
         if (this.state.showPersons) {
             style.backgroundColor = 'red';
-            style[':hover'] = {
-                backgroundColor: 'salmon',
-                color: 'black'
-            };
             persons = (
                 <div>
                     {this.state.persons.map((person, index) => {
@@ -82,7 +73,6 @@ class App extends Component {
         }
 
         return (
-            <StyleRoot>
                 <div className="App">
                     <h1>Hi, hello world!</h1>
                     <p className={classes.join(' ')}>This is dynamic CSS</p>
@@ -92,9 +82,8 @@ class App extends Component {
                     </button>
                     {persons}
                 </div>
-            </StyleRoot>
         );
     }
 }
 
-export default Radium(App);
+export default App;
