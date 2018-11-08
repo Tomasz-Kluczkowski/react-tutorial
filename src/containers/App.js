@@ -4,6 +4,12 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
+
+    constructor (props) {
+        super(props);
+        console.log('app constructor')
+    }
+
     state = {
         persons: [
             {id: 1, name: 'Tom', age: 40},
@@ -12,6 +18,14 @@ class App extends Component {
         ],
         showPersons: false,
     };
+
+    componentWillMount() {
+        console.log('app component will mount')
+    }
+
+    componentDidMount() {
+        console.log('app component did mount')
+    }
 
     deletePersonHandler = (index) => {
         const persons = this.state.persons;
@@ -39,7 +53,7 @@ class App extends Component {
     };
 
     render() {
-
+        console.log('app render');
         let persons = null;
 
         if (this.state.showPersons) {
