@@ -1,9 +1,10 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import classes from './App.css';
 import Persons from '../components/Persons/Persons';
+import WithClass from '../hoc/WithClass';
 import Cockpit from '../components/Cockpit/Cockpit';
 
-class App extends Component {
+class App extends PureComponent {
 
     constructor (props) {
         super(props);
@@ -27,8 +28,19 @@ class App extends Component {
         console.log('app component did mount')
     }
 
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     console.log('[update App.js] inside shouldComponentUpdate', nextProps, nextState);
+    //     return true;
+    // }
+
+    componentDidUpdate() {
+        console.log('update App.js inside componentDidUpdate')
+    }
+
+
+
     deletePersonHandler = (index) => {
-        const persons = this.state.persons;
+        const persons = [...this.state.persons];
         persons.splice(index, 1);
         this.setState({persons: persons})
     };
@@ -67,7 +79,8 @@ class App extends Component {
         }
 
         return (
-                <div className={classes.App}>
+                <WithClass classes={classes.App}>
+                    <button onClick={() => {this.setState({showPersons: true})}}>Show Persons</button>
                     <Cockpit
                         appTitle={this.props.title}
                         showPersons={this.state.showPersons}
@@ -75,7 +88,7 @@ class App extends Component {
                         clicked={this.togglePersonsHandler}
                     />
                     {persons}
-                </div>
+                </WithClass>
         );
     }
 }
