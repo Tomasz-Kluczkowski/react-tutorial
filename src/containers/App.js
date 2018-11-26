@@ -8,17 +8,18 @@ class App extends PureComponent {
 
     constructor (props) {
         super(props);
-        console.log('app constructor')
+        console.log('app constructor');
+        this.state = {
+            persons: [
+                {id: 1, name: 'Tom', age: 40},
+                {id: 2, name: 'Mac', age: 39},
+                {id: 3, name: 'Wiola', age: 18},
+            ],
+            showPersons: false,
+            toggleClicked: 0,
+        };
     }
 
-    state = {
-        persons: [
-            {id: 1, name: 'Tom', age: 40},
-            {id: 2, name: 'Mac', age: 39},
-            {id: 3, name: 'Wiola', age: 18},
-        ],
-        showPersons: false,
-    };
 
     componentWillMount() {
         console.log('app component will mount')
@@ -61,7 +62,12 @@ class App extends PureComponent {
 
     togglePersonsHandler = () => {
         const doesShow = this.state.showPersons;
-        this.setState({showPersons: !doesShow})
+        this.setState((prevState, props) => {
+            return {
+                showPersons: !doesShow,
+                toggleClicked: prevState.toggleClicked + 1
+            }
+        })
     };
 
     render() {
