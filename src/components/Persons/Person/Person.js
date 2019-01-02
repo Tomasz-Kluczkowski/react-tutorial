@@ -42,7 +42,7 @@ class Person extends Component {
             </WithClass>
         )
     }
-};
+}
 
 Person.propTypes = {
   click: PropTypes.func,
